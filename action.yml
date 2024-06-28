@@ -32,7 +32,7 @@ runs:
           echo "vk-ci-sdk-artifact-name=vulkanSDK-${{ inputs.sdkVersion }}-windows-2022-x64.zip" >> "$GITHUB_OUTPUT"
           echo "vk-ci-swiftshader-artifact-name=swiftshader-windows-2022-x64.zip" >> "$GITHUB_OUTPUT"
           echo "vk-ci-swiftshader-lib-name=vk_swiftshader.dll" >> "$GITHUB_OUTPUT"
-        elif [[ "${{ runner.os }}" == "Android" ]]; then
+        elif [[ "${{ runner.os }}" == "Linux" ]]; then
           echo "vk-ci-sdk-artifact-name=vulkanSDK-${{ inputs.sdkVersion }}-android-arm64.zip" >> "$GITHUB_OUTPUT"
           echo "vk-ci-swiftshader-artifact-name=swiftshader-android-arm64.zip" >> "$GITHUB_OUTPUT"
           echo "vk-ci-swiftshader-lib-name=libvk_swiftshader.so" >> "$GITHUB_OUTPUT"
@@ -98,7 +98,7 @@ runs:
         if [[ "${{ runner.os }}" == "Windows" ]]; then
           echo "VK_LAYER_PATH=$SDK_INSTALL_PATH/bin" >> "$GITHUB_ENV"
           echo "$SDK_INSTALL_PATH/bin" >> "$GITHUB_PATH"
-        elif [[ "${{ runner.os }}" == "Android" ]]; then
+        elif [[ "${{ runner.os }}" == "Linux" ]]; then
           echo "VK_LAYER_PATH=$SDK_INSTALL_PATH/share/vulkan/explicit_layer.d" >> "$GITHUB_ENV"
           echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$SDK_INSTALL_PATH/lib:$SWIFTSHADER_INSTALL_PATH" >> "$GITHUB_ENV"
         elif [[ "${{ runner.os }}" == "macOS" ]]; then
