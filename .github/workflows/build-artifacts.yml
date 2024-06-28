@@ -2,6 +2,7 @@ name: build-artifacts
 
 on:
   workflow_dispatch:
+  push:
 
 jobs:
   build-swiftshader:
@@ -11,7 +12,7 @@ jobs:
         include:
           - os: windows-2022
             swiftshaderLibName: vk_swiftshader.dll
-          - os: ubuntu-20.04
+          - os: android-arm64
             swiftshaderLibName: libvk_swiftshader.so
           - os: macOS-12
             swiftshaderLibName: libvk_swiftshader.dylib
@@ -37,7 +38,7 @@ jobs:
           if [[ "${{ runner.os }}" == "Windows" ]]; then
             OUT_DIR=Windows
           elif [[ "${{ runner.os }}" == "Linux" ]]; then
-            OUT_DIR=Linux
+            OUT_DIR=Android
           elif [[ "${{ runner.os }}" == "macOS" ]]; then
             OUT_DIR=Darwin
           fi
@@ -55,8 +56,8 @@ jobs:
   build-sdk:
     strategy:
       matrix:
-        os: [windows-2022, ubuntu-20.04, macOS-12]
-        sdkTag: ['vulkan-sdk-1.3.283.0', 'vulkan-sdk-1.3.280.0', 'vulkan-sdk-1.3.275.0', 'sdk-1.3.261.1']
+        os: [windows-2022, android-arm64 , macOS-12]
+        sdkTag: ['vulkan-sdk-1.3.283.0', 'vulkan-sdk-1.3.280.0', 'vulkan-sdk-1.3.275.0', 'sdk-1.1.177.0']
 
     name: '${{ matrix.sdkTag }}-${{ matrix.os }}'
     runs-on: ${{ matrix.os }}
